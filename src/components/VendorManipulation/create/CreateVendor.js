@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {formValueSelector} from 'redux-form';
 
-import * as userActions from "../../../actions/vendorAction";
+import * as vendorActions from "../../../actions/vendorAction";
 import BusinessInfo from "./BusinessInfo";
 import TaxInfo from "./TaxInfo";
 
@@ -26,24 +26,20 @@ class CreateVendor extends React.Component {
   }
 
   onLoadVendorClick(event) {
-    this.props.actions.loadVendor("Ethan");
-  }
-
-  onAddressClick(event) {
-    const fieldaddress = {
-      address1: "808 Military Rd",
-      city: "Rothschild",
-      state: "WI",
-      zip: "54474",
-      country: "United States"
+    const vendor = {
+      baddress1: "808 Military Rd",
+      bcity: "Rothschild",
+      bstate: "WI",
+      bzip: "54474",
+      bcountry: "United States"
     }
-    //this.props.actions.loadAddress(address);
+    this.props.actions.loadVendor(vendor);
   }
 
   render() {
     return (
       <div>
-        <h1>Vendor: {this.props.vendor}</h1>
+        <h1>Vendor:</h1>
         <button onClick={this.onLoadVendorClick}>Load Vendor</button>
         <h1>BusinessInfo:</h1>
         <BusinessInfo
@@ -60,7 +56,7 @@ class CreateVendor extends React.Component {
   }
 }
 
-const selector = formValueSelector('fieldLevelValidation');
+const selector = formValueSelector('businessInfo');
 
 function mapStateToProps(state, ownProps) {
   // What is returned will show up in props, state is the redux state
@@ -72,7 +68,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, userActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, vendorActions), dispatch)
   };
 }
 

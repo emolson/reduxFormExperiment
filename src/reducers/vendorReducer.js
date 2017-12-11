@@ -6,7 +6,7 @@ import initialState from "../store/initialState";
 export default function vendorReducer(state = initialState.vendor, action) {
   switch (action.type) {
     case 'LOAD_VENDOR':
-      return {vendor: action.vendor};
+      return action.vendor;
 
     default:
       return state;

@@ -54,23 +54,36 @@ let BusinessInfo = props => {
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 BusinessInfo = reduxForm({
-  form: 'fieldLevelValidation' // a unique identifier for this form
+  form: 'businessInfo' // a unique identifier for this form
 })(BusinessInfo);
 
 // Decorate with connect to read form values
-const selector = formValueSelector('fieldLevelValidation'); // <-- same as form name
+const selector = formValueSelector('businessInfo'); // <-- same as form name
 BusinessInfo = connect(state => {
   // can select values individually
   const username = selector(state, 'username');
   return {
     username
   }
-})(BusinessInfo)
+})(BusinessInfo);
+
+const transformVendorToBusinessInfo = vendor => {
+  if(vendor) {
+    return {
+      address: {
+        address1: vendor.baddress1,
+        city: vendor.bcity
+      }
+    }
+  } else {
+    return {}
+  }
+}
 
 // You have to connect() to any reducers that you wish to connect to yourself
 BusinessInfo = connect(
   state => ({
-    initialValues: state.address // pull initial values from user reducer
+    initialValues: transformVendorToBusinessInfo(state.vendor) // pull initial values from user reducer
   })
   //,
   // { load: loadAccount } // bind account loading action creator
