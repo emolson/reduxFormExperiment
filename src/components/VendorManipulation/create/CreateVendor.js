@@ -7,7 +7,7 @@ import {bindActionCreators} from "redux";
 import {formValueSelector} from 'redux-form';
 
 import * as userActions from "../../../actions/vendorAction";
-import FieldLevelValidation from "./FieldLevelValidation";
+import BusinessInfo from "./BusinessInfo";
 import TaxInfo from "./TaxInfo";
 
 
@@ -45,10 +45,12 @@ class CreateVendor extends React.Component {
       <div>
         <h1>Vendor: {this.props.vendor}</h1>
         <button onClick={this.onLoadVendorClick}>Load Vendor</button>
-        <FieldLevelValidation
+        <h1>BusinessInfo:</h1>
+        <BusinessInfo
           onSubmit={this.onSubmit}
           enableReinitialize={true}
         />
+        <h1>TaxInfo:</h1>
         <TaxInfo
           onSubmit={this.onSubmit}
           enableReinitialize={true}
@@ -63,6 +65,7 @@ const selector = formValueSelector('fieldLevelValidation');
 function mapStateToProps(state, ownProps) {
   // What is returned will show up in props, state is the redux state
   return {
+    vendor: state.vendor,
     address1: selector(state, 'type1')
   };
 }

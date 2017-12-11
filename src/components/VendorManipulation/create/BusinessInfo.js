@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Field, reduxForm, FormSection, formValueSelector} from 'redux-form';
+import {Field, reduxForm, formValueSelector} from 'redux-form';
 
 import {required, alphaNumeric} from "../../../validation/validation";
 import Address from "../../common/Address";
@@ -25,7 +25,7 @@ const renderField = ({
   </div>
 )
 
-let FieldLevelValidationForm = props => {
+let BusinessInfo = props => {
   const {handleSubmit, pristine, reset, submitting} = props
   return (
     <form onSubmit={handleSubmit}>
@@ -53,27 +53,27 @@ let FieldLevelValidationForm = props => {
 }
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
-FieldLevelValidationForm = reduxForm({
+BusinessInfo = reduxForm({
   form: 'fieldLevelValidation' // a unique identifier for this form
-})(FieldLevelValidationForm);
+})(BusinessInfo);
 
 // Decorate with connect to read form values
 const selector = formValueSelector('fieldLevelValidation'); // <-- same as form name
-FieldLevelValidationForm = connect(state => {
+BusinessInfo = connect(state => {
   // can select values individually
   const username = selector(state, 'username');
   return {
     username
   }
-})(FieldLevelValidationForm)
+})(BusinessInfo)
 
 // You have to connect() to any reducers that you wish to connect to yourself
-FieldLevelValidationForm = connect(
+BusinessInfo = connect(
   state => ({
     initialValues: state.address // pull initial values from user reducer
   })
   //,
   // { load: loadAccount } // bind account loading action creator
-)(FieldLevelValidationForm);
+)(BusinessInfo);
 
-export default FieldLevelValidationForm
+export default BusinessInfo
