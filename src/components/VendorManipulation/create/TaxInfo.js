@@ -26,12 +26,14 @@ const renderField = ({
 )
 
 let TaxInfoForm = props => {
-  const {handleSubmit, pristine, reset, submitting} = props
+  const {handleSubmit, pristine, reset, submitting, username} = props
   return (
     <form onSubmit={handleSubmit}>
 
       <Address/>
-
+      <div>
+        I'm in Tax info, but check out this username: {username}
+      </div>
       <div>
         <button type="submit" disabled={submitting}>
           Submit
@@ -50,7 +52,7 @@ TaxInfoForm = reduxForm({
 })(TaxInfoForm);
 
 // Decorate with connect to read form values
-const selector = formValueSelector('fieldLevelValidation'); // <-- same as form name
+const selector = formValueSelector('businessInfo'); // <-- same as form name
 TaxInfoForm = connect(state => {
   // can select values individually
   const username = selector(state, 'username');
