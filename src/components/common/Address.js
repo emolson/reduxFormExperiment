@@ -53,16 +53,4 @@ Address.defaultProps = {
   name: "address"
 };
 
-// // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
-// Address = reduxForm({
-//   form: 'address' // a unique identifier for this form
-// })(Address);
-//
-// // You have to connect() to any reducers that you wish to connect to yourself
-// Address = connect(
-//   state => ({
-//     initialValues: state.user // pull initial values from account reducer
-//   })
-// )(Address);
-
 export default Address;

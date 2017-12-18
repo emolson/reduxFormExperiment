@@ -14,7 +14,6 @@ import TaxInfo from "./TaxInfo";
 class CreateVendor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onLoadVendorClick = this.onLoadVendorClick.bind(this);
@@ -37,12 +36,20 @@ class CreateVendor extends React.Component {
   }
 
   render() {
+    const businessValues = {
+      initialValues: {
+        address: {
+          address1: 'asdfsadf'
+        }
+      }
+    }
     return (
       <div>
         <h1>Vendor:</h1>
         <button onClick={this.onLoadVendorClick}>Load Vendor</button>
         <h1>BusinessInfo:</h1>
         <BusinessInfo
+          {...businessValues}
           onSubmit={this.onSubmit}
           enableReinitialize={true}
         />

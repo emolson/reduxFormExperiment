@@ -62,7 +62,7 @@ TaxInfoForm = connect(state => {
 // You have to connect() to any reducers that you wish to connect to yourself
 TaxInfoForm = connect(
   state => ({
-    initialValues: state.address // pull initial values from user reducer
+    initialValues: {address1: 23} // pull initial values from user reducer
   })
   //,
   // { load: loadAccount } // bind account loading action creator
