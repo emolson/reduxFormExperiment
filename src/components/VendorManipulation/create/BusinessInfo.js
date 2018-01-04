@@ -43,7 +43,7 @@ class BusinessInfo extends Component {
     const {handleSubmit, pristine, reset, submitting, change} = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <button onClick={this.click}></button>
+        <button onClick={this.click}>Change User To Ethan</button>
         <Field
           name="username"
           type="text"
@@ -70,27 +70,15 @@ class BusinessInfo extends Component {
 
 // Decorate with connect to read form values
 const selector = formValueSelector('businessInfo'); // <-- same as form name
-
-const transformVendorToBusinessInfo = vendor => {
-  if(vendor) {
-    return {
-      address: {
-        address1: vendor.baddress1,
-        city: vendor.bcity
-      }
-    }
-  } else {
-    return {}
-  }
-};
-
+const selectortax = formValueSelector('taxInfoForm'); // <-- same as form name
 
 function mapStateToProps(state, ownProps) {
   // What is returned will show up in props, state is the redux state
   return {
-    initialValues: transformVendorToBusinessInfo(state.vendor), // pull initial values from user reducer
-    username : selector(state, 'username')
-  };
+    username : selector(state, 'username'),
+    taxadress : selectortax(state, 'address.state') // <-- same as form name
+
+};
 }
 
 function mapDispatchToProps(dispatch) {

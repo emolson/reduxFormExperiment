@@ -26,30 +26,23 @@ class CreateVendor extends React.Component {
 
   onLoadVendorClick(event) {
     const vendor = {
-      baddress1: "808 Military Rd",
-      bcity: "Rothschild",
-      bstate: "WI",
-      bzip: "54474",
-      bcountry: "United States"
+      address1: "808 Military Rd",
+      city: "Rothschild",
+      state: "WI",
+      zip: "54474",
+      country: "United States"
     }
     this.props.actions.loadVendor(vendor);
   }
 
   render() {
-    const businessValues = {
-      initialValues: {
-        address: {
-          address1: 'asdfsadf'
-        }
-      }
-    }
     return (
       <div>
         <h1>Vendor:</h1>
         <button onClick={this.onLoadVendorClick}>Load Vendor</button>
         <h1>BusinessInfo:</h1>
         <BusinessInfo
-          {...businessValues}
+          initialValues={{address: this.props.vendor}}
           onSubmit={this.onSubmit}
           enableReinitialize={true}
         />
