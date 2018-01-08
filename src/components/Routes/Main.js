@@ -8,7 +8,7 @@ import {Switch, Route} from 'react-router-dom'
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path='/' component={CreateVendor}/>
+      <Route exact path='/createVendor' component={CreateVendor}/>
     </Switch>
   </main>
 );

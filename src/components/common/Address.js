@@ -15,13 +15,11 @@ class Address extends FormSection {
       <div>
         <InputField
           name="address1"
-          type="text"
           label="Address Line 1"
           validate={[required]}
         />
         <InputField
           name="city"
-          type="text"
           label="City"
           validate={[required]}
         />
@@ -33,13 +31,11 @@ class Address extends FormSection {
         />
         <InputField
           name="zip"
-          type="text"
           label="Zip"
           validate={[required, numeric]}
         />
         <DropDownField
           name="country"
-          type="text"
           options={['United States', 'Canada', 'Mexico']}
           label="Country"
           validate={[required]}

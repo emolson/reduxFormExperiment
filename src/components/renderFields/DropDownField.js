@@ -7,8 +7,7 @@ import {Field} from 'redux-form';
 
 const renderField = (field) => (
   <div>
-    <label>{field.label}</label>
-    <div>
+      <label>{field.label}:</label>
       <select {...field.input} placeholder={field.label}>
         <option key="" value="">{""}</option>
         {field.options.map(state =>
@@ -17,7 +16,6 @@ const renderField = (field) => (
       </select>
       {field.meta.touched && field.meta.error &&
       <span>{field.meta.error}</span>}
-    </div>
   </div>
 );
 
@@ -30,15 +28,13 @@ const DropDown = props =>
 DropDown.propTypes = {
   validate: array.isRequired,
   name: string.isRequired,
-  label: string.isRequired,
-  type: string.isRequired
+  label: string.isRequired
 };
 
 DropDown.defaultProps = {
   validate: {},
   name: "",
-  label: "",
-  type: 'text'
+  label: ""
 };
 
 export default DropDown;
