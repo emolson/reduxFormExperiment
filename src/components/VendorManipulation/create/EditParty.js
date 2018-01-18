@@ -6,17 +6,17 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {formValueSelector} from 'redux-form';
 
-import * as vendorActions from "../../../actions/vendorAction";
+import * as vendorActions from "../../../actions/partyAction";
 import BusinessInfo from "./BusinessInfo";
 import TaxInfo from "./TaxInfo";
 
 
-class CreateVendor extends React.Component {
+class EditParty extends React.Component {
   constructor(props) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.onLoadVendorClick = this.onLoadVendorClick.bind(this);
+    this.onLoadPartyClick = this.onLoadPartyClick.bind(this);
   }
 
 
@@ -24,7 +24,7 @@ class CreateVendor extends React.Component {
     console.log("I be the one handling the submit: " + values);
   }
 
-  onLoadVendorClick(event) {
+  onLoadPartyClick(event) {
     const vendor = {
       businessName: "Ethan's Business",
       address: {
@@ -35,14 +35,14 @@ class CreateVendor extends React.Component {
         country: "United States"
       }
     }
-    this.props.actions.loadVendor(vendor);
+    this.props.actions.loadParty(vendor);
   }
 
   render() {
     return (
       <div>
-        <h1>Vendor:</h1>
-        <button onClick={this.onLoadVendorClick}>Load Vendor</button>
+        <h1>Party:</h1>
+        <button onClick={this.onLoadPartyClick}>Load Party</button>
         <h1>BusinessInfo:</h1>
         <BusinessInfo
           initialValues={{
@@ -84,4 +84,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateVendor);
+)(EditParty);

@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 const Header = () => {
   return (
     <nav>
-      <Link to="/createVendor">Create Vendor</Link>
+      <Link to="/createParty">Create Party</Link>
       {" | "}
     </nav>
   );

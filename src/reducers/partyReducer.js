@@ -3,10 +3,10 @@
  */
 import initialState from "../store/initialState";
 
-export default function vendorReducer(state = initialState.vendor, action) {
+export default function vendorReducer(state = initialState.party, action) {
   switch (action.type) {
-    case 'LOAD_VENDOR':
-      return action.vendor;
+    case 'LOAD_PARTY':
+      return action.party;
 
     default:
       return state;
