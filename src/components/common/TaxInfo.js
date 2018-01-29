@@ -6,9 +6,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {reduxForm, formValueSelector} from 'redux-form';
 
-import {required, alphaNumeric} from "../../../validation/validation";
-import Address from "../../common/Address";
-import RadioButton from "../../renderFields/RadioButtonField";
+import {required, alphaNumeric} from "../../validation/validation";
+import Address from "./Address";
+import RadioButton from "../renderFields/RadioButtonField";
 
 class TaxInfo extends Component {
   constructor(props) {

@@ -3,24 +3,15 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Field, reduxForm, formValueSelector} from 'redux-form';
+import {reduxForm, formValueSelector} from 'redux-form';
 import {bindActionCreators} from "redux";
 
-import {required, alphaNumeric} from "../../../validation/validation";
-import Address from "../../common/Address";
-import InputField from "../../renderFields/InputField";
+import {required, alphaNumeric} from "../../validation/validation";
+import Address from "./Address";
+import DropDownField from "../renderFields/DropDownField";
 
-const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-    <div>
-      <label>{label}: </label>
-      <input {...input} placeholder={label} type={type}/>
-      {touched &&
-      ((error && <span>{error}</span>) ||
-      (warning && <span>{warning}</span>))}
-    </div>
-);
 
-class BusinessInfo extends Component {
+class PartyInfo extends Component {
   constructor(props) {
     super(props);
   }
@@ -35,12 +26,12 @@ class BusinessInfo extends Component {
     const {handleSubmit, pristine, reset, submitting, change} = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <InputField
-          name="businessName"
-          type="text"
-          label="Business Name"
+        <h1>Party Information:</h1>
+        <DropDownField
+          name="partyType"
+          options={['Birthday', 'Sports', 'Rager']}
+          label="Type of Party"
           validate={[required]}
-          warn={alphaNumeric}
         />
 
         <Address/>
@@ -77,5 +68,5 @@ function mapDispatchToProps(dispatch) {
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 export default reduxForm({
-  form: 'businessInfo' // a unique identifier for this form
-})(connect(mapStateToProps, mapDispatchToProps)(BusinessInfo));
+  form: 'partyInfo' // a unique identifier for this form
+})(connect(mapStateToProps, mapDispatchToProps)(PartyInfo));

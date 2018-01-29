@@ -7,8 +7,8 @@ import {bindActionCreators} from "redux";
 import {formValueSelector} from 'redux-form';
 
 import * as vendorActions from "../../../actions/partyAction";
-import BusinessInfo from "./BusinessInfo";
-import TaxInfo from "./TaxInfo";
+import BusinessInfo from "../../common/PartyInfo";
+import TaxInfo from "../../common/TaxInfo";
 
 
 class EditParty extends React.Component {
