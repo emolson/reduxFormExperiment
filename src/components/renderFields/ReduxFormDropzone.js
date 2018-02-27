@@ -23,5 +23,4 @@ const ReduxFormDropzone = (field) => {
   );
 }
 
-
 export default ReduxFormDropzone;

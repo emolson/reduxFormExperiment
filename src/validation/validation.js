@@ -3,6 +3,7 @@
  */
 
 export function required(value, allValues, props, name) {
+  // can get allValues to check against other fields
   return value ? undefined : 'Required';
 }
 

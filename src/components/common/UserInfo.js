@@ -7,11 +7,10 @@ import {bindActionCreators} from "redux";
 import {reduxForm, formValueSelector} from 'redux-form';
 import {Field} from 'redux-form';
 
-import {required, alphaNumeric} from "../../validation/validation";
+import {required} from "../../validation/validation";
 import Address from "./Address";
 import RadioButton from "../renderFields/RadioButtonField";
-import FileInput from "./FileInput";
-import ReduxFormDropzone from "./ReduxFormDropzone";
+import ReduxFormDropzone from "../renderFields/ReduxFormDropzone";
 
 class UserInfo extends Component {
   constructor(props) {
@@ -31,24 +30,19 @@ class UserInfo extends Component {
     return (
       <form onSubmit={handleSubmit}>
 
-        <div>
-          Address Type is : {addressType}
-        </div>
+        <div>Address Type is : {addressType}</div>
         <RadioButton
           validate={[required]}
           name="addressType"
           label="Type of Address: "
-          valueList={["Business", "Tax Address"]}
+          valueList={["Party Address", "User Address"]}
           onChange={this.handleAddressRadioButtonChange}
         />
 
         <Address/>
 
         <Field name="userFile" component={ReduxFormDropzone}></Field>
-
-        {this.props.file &&
-        <img src={this.props.file.preview}/>
-        }
+        {this.props.file[0] && <img src={this.props.file[0].preview}/>}
 
         <div>
           <button type="submit" disabled={submitting}>
@@ -58,7 +52,6 @@ class UserInfo extends Component {
             Clear Values
           </button>
         </div>
-
       </form>
     );
   }

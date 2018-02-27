@@ -3,18 +3,16 @@
  */
 import React from 'react';
 import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
 import {formValueSelector, reset} from 'redux-form';
 
-import * as partyActions from "../../../actions/partyAction";
-import PartyInfo from "../../common/PartyInfo";
-import UserInfo from "../../common/UserInfo";
+import PartyInfo from "../common/PartyInfo";
+import UserInfo from "../common/UserInfo";
 
 class CreateParty extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formBackground: ''
+      page: ''
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.colorBasedOnPartyType = this.colorBasedOnPartyType.bind(this);
@@ -23,20 +21,22 @@ class CreateParty extends React.Component {
 
   onSubmit(values) {
     this.props.history.push('/createParty/guestInfo');
+    //todo test to make sure you can reset pages on final submission
     values.address.zip === '333' && this.props.dispatch(reset('partyInfo'));
     console.log("I be the one handling the submit: " + values);
   }
 
   colorBasedOnPartyType() {
     if (this.props.partyType === 'Birthday') {
-      return require("../../../styles/backgrounds/birthdayBackground.png");
+      return require("../../styles/backgrounds/birthdayBackground.png");
     } else if (this.props.partyType === 'Sports') {
-      return require("../../../styles/backgrounds/sportsBackground.png");
+      return require("../../styles/backgrounds/sportsBackground.png");
     } else if (this.props.partyType === 'Rager') {
-      return require("../../../styles/backgrounds/ragerBackground.png");
+      return require("../../styles/backgrounds/ragerBackground.png");
     }
   }
 
+  //todo this is gross, need to change this to routes
   determinePage(pageName) {
     switch (pageName) {
       case "partyInfo":
@@ -103,7 +103,6 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, partyActions), dispatch),
     dispatch: (func) => {
       dispatch(func);
     }
