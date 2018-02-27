@@ -9,7 +9,7 @@ import open from 'open';
 
 /* eslint-disable no-console */
 
-const port = 5002;
+const port = 5004;
 const app = express();
 const compiler = webpack(config);
 

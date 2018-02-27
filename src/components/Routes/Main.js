@@ -3,12 +3,14 @@
  */
 import React from 'react';
 import CreateParty from '../VendorManipulation/create/CreateParty';
-import {Switch, Route} from 'react-router-dom'
+import SimpleForm from '../common/SimpleForm';
+import {Switch, Route} from 'react-router-dom';
 
 const Main = () => (
   <main>
     <Switch>
       <Route path='/createParty/:page' component={CreateParty}/>
+      <Route path='/simple' component={SimpleForm}/>
     </Switch>
   </main>
 );

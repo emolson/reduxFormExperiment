@@ -5,16 +5,6 @@ import React from 'react';
 import {string, object, array} from 'prop-types';
 import {Field} from 'redux-form';
 
-// const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-//     <div>
-//       <label>{label}: </label>
-//       <input {...input} placeholder={label} type={type}/>
-//       {touched &&
-//       ((error && <span>{error}</span>) ||
-//       (warning && <span>{warning}</span>))}
-//     </div>
-// );
-
 const RadioButton = props => {
   const {validate, label, valueList, name, onChange} = props;
 

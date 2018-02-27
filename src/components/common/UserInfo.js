@@ -5,12 +5,15 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {reduxForm, formValueSelector} from 'redux-form';
+import {Field} from 'redux-form';
 
 import {required, alphaNumeric} from "../../validation/validation";
 import Address from "./Address";
 import RadioButton from "../renderFields/RadioButtonField";
+import FileInput from "./FileInput";
+import ReduxFormDropzone from "./ReduxFormDropzone";
 
-class TaxInfo extends Component {
+class UserInfo extends Component {
   constructor(props) {
     super(props);
 
@@ -23,11 +26,14 @@ class TaxInfo extends Component {
   }
 
   render() {
-    const {handleSubmit, pristine, reset, submitting, businessAddress} = this.props;
+    const {handleSubmit, pristine, reset, submitting, businessAddress, addressType} = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
 
+        <div>
+          Address Type is : {addressType}
+        </div>
         <RadioButton
           validate={[required]}
           name="addressType"
@@ -37,6 +43,12 @@ class TaxInfo extends Component {
         />
 
         <Address/>
+
+        <Field name="userFile" component={ReduxFormDropzone}></Field>
+
+        {this.props.file &&
+        <img src={this.props.file.preview}/>
+        }
 
         <div>
           <button type="submit" disabled={submitting}>
@@ -52,13 +64,14 @@ class TaxInfo extends Component {
   }
 }
 
-const selectorBusinessInfo = formValueSelector('businessInfo'); // <-- same as form name
-const selectorTaxInfo = formValueSelector('taxInfo'); // <-- same as form name
+const selectorBusinessInfo = formValueSelector('partyInfo'); // <-- same as form name
+const selectorUserInfo = formValueSelector('userInfo'); // <-- same as form name
 
 function mapStateToProps(state, ownProps) {
   return {
     businessAddress: selectorBusinessInfo(state, 'address'),
-    addressType: selectorTaxInfo(state, 'addressType')
+    addressType: selectorUserInfo(state, 'addressType'),
+    file: selectorUserInfo(state, 'userFile')
   };
 }
 
@@ -69,5 +82,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default reduxForm({
-  form: 'taxInfo'
-})(connect(mapStateToProps, mapDispatchToProps)(TaxInfo));
+  form: 'userInfo'
+})(connect(mapStateToProps, mapDispatchToProps)(UserInfo));

@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {reduxForm, formValueSelector} from 'redux-form';
 import {bindActionCreators} from "redux";
-
 import {required, alphaNumeric} from "../../validation/validation";
 import Address from "./Address";
 import DropDownField from "../renderFields/DropDownField";
@@ -36,7 +35,7 @@ class PartyInfo extends Component {
 
         <Address/>
 
-        <div className="container">
+        <div>
           <div className="row">
             <button className="col-xs-4" type="button" disabled={pristine || submitting} onClick={reset}>
               Clear Values
@@ -46,13 +45,12 @@ class PartyInfo extends Component {
             </button>
           </div>
         </div>
-
       </form>
     );
   }
 }
 
-const selector = formValueSelector('businessInfo'); // <-- same as form name
+const selector = formValueSelector('partyInfo'); // <-- same as form name
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -68,5 +66,6 @@ function mapDispatchToProps(dispatch) {
 
 // Decorate with reduxForm(). It will read the initialValues prop provided by connect()
 export default reduxForm({
-  form: 'partyInfo' // a unique identifier for this form
+  form: 'partyInfo', // a unique identifier for this form
+  destroyOnUnmount: false
 })(connect(mapStateToProps, mapDispatchToProps)(PartyInfo));
