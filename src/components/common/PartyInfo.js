@@ -3,9 +3,11 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {reduxForm, formValueSelector} from 'redux-form';
 import {bindActionCreators} from "redux";
-import {required, alphaNumeric} from "../../validation/validation";
+import {reduxForm, formValueSelector} from 'redux-form';
+
+import {required} from "../../validation/validation";
+import ButtonSet from "../common/ButtonSet";
 import Address from "./Address";
 import DropDownField from "../renderFields/DropDownField";
 
@@ -14,12 +16,6 @@ class PartyInfo extends Component {
   constructor(props) {
     super(props);
   }
-
-  // click(event) {
-  //   event.preventDefault();
-  //   console.log(this.props.change);
-  //   this.props.change('username', "Ethan");
-  // }
 
   render() {
     const {handleSubmit, pristine, reset, submitting, change} = this.props;
@@ -35,16 +31,13 @@ class PartyInfo extends Component {
 
         <Address/>
 
-        <div>
-          <div className="row">
-            <button className="col-xs-4" type="button" disabled={pristine || submitting} onClick={reset}>
-              Clear Values
-            </button>
-            <button className="col-xs-4" type="submit" disabled={submitting}>
-              Next Page
-            </button>
-          </div>
-        </div>
+        <ButtonSet
+          pristine={pristine}
+          reset={reset}
+          submit="Next Page"
+          clear="Clear Values"
+          submitting={submitting}/>
+
       </form>
     );
   }

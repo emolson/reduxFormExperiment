@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone';
 const ReduxFormDropzone = (field) => {
   const files = field.input.value;
   return (
-    <div>
+    <div style={{marginTop:"15px"}}>
       <Dropzone
         name={field.name}
         onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}

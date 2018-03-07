@@ -8,6 +8,7 @@ import {reduxForm, formValueSelector} from 'redux-form';
 import {Field} from 'redux-form';
 
 import {required} from "../../validation/validation";
+import ButtonSet from "../common/ButtonSet";
 import Address from "./Address";
 import RadioButton from "../renderFields/RadioButtonField";
 import ReduxFormDropzone from "../renderFields/ReduxFormDropzone";
@@ -20,8 +21,8 @@ class UserInfo extends Component {
   }
 
   handleAddressRadioButtonChange(event) {
-    event.target.value == "Tax Address" && this.props.change('address', {});
-    event.target.value == "Business" && this.props.change('address', this.props.businessAddress);
+    event.target.value == "Party Address" && this.props.change('address', this.props.businessAddress);
+    event.target.value == "User Address" && this.props.change('address', {});
   }
 
   render() {
@@ -30,28 +31,25 @@ class UserInfo extends Component {
     return (
       <form onSubmit={handleSubmit}>
 
-        <div>Address Type is : {addressType}</div>
+        <h1>UserInfo:</h1>
         <RadioButton
           validate={[required]}
           name="addressType"
-          label="Type of Address: "
+          label=" "
           valueList={["Party Address", "User Address"]}
-          onChange={this.handleAddressRadioButtonChange}
-        />
+          onChange={this.handleAddressRadioButtonChange}/>
 
         <Address/>
 
         <Field name="userFile" component={ReduxFormDropzone}></Field>
-        {this.props.file[0] && <img src={this.props.file[0].preview}/>}
+        {this.props.file && <img src={this.props.file[0].preview}/>}
 
-        <div>
-          <button type="submit" disabled={submitting}>
-            Submit
-          </button>
-          <button type="button" disabled={pristine || submitting} onClick={reset}>
-            Clear Values
-          </button>
-        </div>
+        <ButtonSet
+          pristine={pristine}
+          reset={reset}
+          submit="Next Page"
+          clear="Clear Values"
+          submitting={submitting}/>
       </form>
     );
   }

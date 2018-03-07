@@ -4,6 +4,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {formValueSelector, reset} from 'redux-form';
+import {Route} from 'react-router-dom';
 
 import PartyInfo from "../common/PartyInfo";
 import UserInfo from "../common/UserInfo";
@@ -14,16 +15,20 @@ class CreateParty extends React.Component {
     this.state = {
       page: ''
     };
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onPartySubmit = this.onPartySubmit.bind(this);
+    this.onUserSubmit = this.onUserSubmit.bind(this);
     this.colorBasedOnPartyType = this.colorBasedOnPartyType.bind(this);
-    this.determinePage = this.determinePage.bind(this);
+    this.partyInfoWrapper = this.partyInfoWrapper.bind(this);
+    this.userInfoWrapper = this.userInfoWrapper.bind(this);
   }
 
-  onSubmit(values) {
+  onPartySubmit(values) {
+    this.props.history.push('/createParty/guestInfo');
+  }
+  onUserSubmit(values) {
     this.props.history.push('/createParty/guestInfo');
     //todo test to make sure you can reset pages on final submission
     values.address.zip === '333' && this.props.dispatch(reset('partyInfo'));
-    console.log("I be the one handling the submit: " + values);
   }
 
   colorBasedOnPartyType() {
@@ -36,54 +41,31 @@ class CreateParty extends React.Component {
     }
   }
 
-  //todo this is gross, need to change this to routes
-  determinePage(pageName) {
-    switch (pageName) {
-      case "partyInfo":
-        return (
-          <div>
-            <PartyInfo
-              onSubmit={this.onSubmit}
-            />
-          </div>);
-      case "guestInfo":
-        return (
-          <div>
-            <h1>UserInfo:</h1>
-            <UserInfo
-              initialValues={{
-                addressType: 'Business',
-                address: this.props.partyAddress
-              }}
-              onSubmit={this.onSubmit}
-              enableReinitialize
-            />
-          </div>);
-      default:
-        return (
-          <div>
-            Error Error Error!
-          </div>);
-    }
+  partyInfoWrapper() {
+    return (<PartyInfo
+      onSubmit={this.onPartySubmit}
+    />);
+  }
+
+  userInfoWrapper() {
+    return ( <UserInfo
+      initialValues={{addressType: 'Party Address', address: this.props.partyAddress}}
+      onSubmit={this.onUserSubmit}
+      enableReinitialize
+    />);
   }
 
   render() {
-    let page = this.determinePage(this.props.match.params.page);
 
     return (
       <div className="container">
         <div className="col-sm-6">
-          <h1>Party:</h1>
-          {page}
+          <Route path='/createParty/partyInfo' render={this.partyInfoWrapper}/>
+          <Route path='/createParty/guestInfo' render={this.userInfoWrapper}/>
         </div>
         <div className="col-sm-6"
-             style={{
-               height: '300px',
-               backgroundImage: 'url(' + this.colorBasedOnPartyType() + ')',
-               backgroundSize: 'contain',
-               backgroundRepeat: 'no-repeat'
-             }}>
-          Party type here:
+             style={{height: '300px', backgroundImage: 'url(' + this.colorBasedOnPartyType() + ')',
+               backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}>Party type here:
         </div>
       </div>
     );
@@ -93,9 +75,7 @@ class CreateParty extends React.Component {
 const selector = formValueSelector('partyInfo');
 
 function mapStateToProps(state, ownProps) {
-  // What is returned will show up in props, state is the redux state
   return {
-    party: state.form.partyInfo,
     partyAddress: selector(state, 'address'),
     partyType: selector(state, 'partyType')
   };

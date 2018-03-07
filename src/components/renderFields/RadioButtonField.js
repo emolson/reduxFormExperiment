@@ -12,10 +12,9 @@ const RadioButton = props => {
     <div>
       <label>{label}</label>
       {valueList.map(value =>
-        <span>
+        <span key={value}>
           {' '}
           <Field
-            key={new Date()}
             name={name}
             value={value}
             component="input"

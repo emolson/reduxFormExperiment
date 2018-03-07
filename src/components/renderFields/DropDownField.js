@@ -2,39 +2,51 @@
  * Created by emols on 12/6/2017.
  */
 import React from 'react';
-import {string, object, array} from 'prop-types';
 import {Field} from 'redux-form';
+import {InputLabel} from 'material-ui/Input';
+import {MenuItem} from 'material-ui/Menu';
+import {FormControl} from 'material-ui/Form';
+import {MuiThemeProvider} from 'material-ui/styles';
+import Select from 'material-ui/Select';
+import {inputTheme} from '../../styles/materialUIThemes';
 
-const renderField = (field) => (
-  <div>
-      <label>{field.label}:</label>
-      <select {...field.input} placeholder={field.label}>
-        <option key="" value="">{""}</option>
-        {field.options.map(state =>
-          <option key={state} value={state}>{state}</option>
-        )}
-      </select>
-      {field.meta.touched && field.meta.error &&
-      <span>{field.meta.error}</span>}
+
+const renderField = ({input, label, meta: {touched, error}, options}) => (
+  <div style={{marginTop:'15px'}}>
+    <MuiThemeProvider theme={inputTheme()}>
+      <FormControl
+        style={{display: 'flex', flexWrap: 'wrap'}}
+        error={(touched && error) ? true : false}
+      >
+        <InputLabel htmlFor="age-simple">{label}</InputLabel>
+        <Select
+          value={input.value}
+          inputProps={input}
+          onChange={(event, index, value) => input.onChange(value)}
+          children={selectChildren(options)}
+        >
+        </Select>
+      </FormControl>
+    </MuiThemeProvider>
+    {(touched && error) && <span>{error}</span>}
   </div>
 );
 
-const DropDown = props =>
+const DropDownField = props => (
   <Field
     {...props}
     component={renderField}
-  />;
+  />
+)
 
-DropDown.propTypes = {
-  validate: array.isRequired,
-  name: string.isRequired,
-  label: string.isRequired
+const selectChildren = options => {
+  let children = [];
+  children.push(<MenuItem key="" value=""></MenuItem>);
+  options.map(option => {
+    children.push(<MenuItem key={option} value={option}>{option}</MenuItem>);
+  });
+  return children;
 };
 
-DropDown.defaultProps = {
-  validate: {},
-  name: "",
-  label: ""
-};
 
-export default DropDown;
+export default DropDownField;

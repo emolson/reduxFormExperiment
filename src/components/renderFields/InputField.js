@@ -3,22 +3,27 @@
  */
 import React from 'react';
 import {string, object, array} from 'prop-types';
+import {MuiThemeProvider} from 'material-ui/styles';
 import {Field} from 'redux-form';
+import TextField from 'material-ui/TextField';
+import {inputTheme} from '../../styles/materialUIThemes';
 
-const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-    <div>
-      <label>{label}: </label>
-      <input {...input} placeholder={label} type={type}/>
-      {touched &&
-      ((error && <span>{error}</span>) ||
-      (warning && <span>{warning}</span>))}
-    </div>
+const renderField = ({input, label, meta: {touched, error}}) => (
+  <div style={{marginTop:'15px'}}>
+    <MuiThemeProvider theme={inputTheme()}>
+      <TextField
+        label={label}
+        error={(touched && error) ? true : false}
+        {...input}
+      />
+    </MuiThemeProvider>
+    {(touched && error) && <span>{error}</span>}
+  </div>
 );
 
 const Input = props =>
   <Field
     {...props}
-    type="text"
     component={renderField}
   />
 

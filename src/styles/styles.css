@@ -1,6 +1,16 @@
 /**
  * Created by emols on 5/25/2017.
  */
+
+body {
+  background: url(backgrounds/greyBackground.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
@@ -16,4 +26,3 @@ a.active {
 nav {
   padding-top: 20px;
 }
-
