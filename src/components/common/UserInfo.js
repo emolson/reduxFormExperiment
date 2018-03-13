@@ -73,5 +73,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default reduxForm({
-  form: 'userInfo'
+  form: 'userInfo',
+  destroyOnUnmount: false
 })(connect(mapStateToProps, mapDispatchToProps)(UserInfo));

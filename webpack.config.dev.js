@@ -32,7 +32,7 @@ export default {
       {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
       {test: /\.ico$/, loader: 'file-loader?name=images/[name].[ext]'},
-      {test: /\.(jpg|png|svg)$/, loader: 'file-loader', options: {name: '[path][name].[hash].[ext]'}}
+      {test: /\.(jpg|png|svg|gif)$/, loader: 'file-loader', options: {name: '[path][name].[hash].[ext]'}}
     ]
   }
 };

@@ -8,6 +8,7 @@ import {Route} from 'react-router-dom';
 
 import PartyInfo from "../common/PartyInfo";
 import UserInfo from "../common/UserInfo";
+import PreviewPage from "../common/PreviewPage";
 
 class CreateParty extends React.Component {
   constructor(props) {
@@ -20,15 +21,16 @@ class CreateParty extends React.Component {
     this.colorBasedOnPartyType = this.colorBasedOnPartyType.bind(this);
     this.partyInfoWrapper = this.partyInfoWrapper.bind(this);
     this.userInfoWrapper = this.userInfoWrapper.bind(this);
+    this.previewPageWrapper = this.previewPageWrapper.bind(this);
   }
 
   onPartySubmit(values) {
     this.props.history.push('/createParty/guestInfo');
   }
   onUserSubmit(values) {
-    this.props.history.push('/createParty/guestInfo');
+    this.props.history.push('/createParty/previewPage');
     //todo test to make sure you can reset pages on final submission
-    values.address.zip === '333' && this.props.dispatch(reset('partyInfo'));
+    //values.address.zip === '333' && this.props.dispatch(reset('partyInfo'));
   }
 
   colorBasedOnPartyType() {
@@ -37,7 +39,7 @@ class CreateParty extends React.Component {
     } else if (this.props.partyType === 'Sports') {
       return require("../../styles/backgrounds/sportsBackground.png");
     } else if (this.props.partyType === 'Rager') {
-      return require("../../styles/backgrounds/ragerBackground.png");
+      return require("../../styles/backgrounds/giphy4.gif");
     }
   }
 
@@ -55,6 +57,10 @@ class CreateParty extends React.Component {
     />);
   }
 
+  previewPageWrapper() {
+    return ( <PreviewPage/>);
+  }
+
   render() {
 
     return (
@@ -62,6 +68,7 @@ class CreateParty extends React.Component {
         <div className="col-sm-6">
           <Route path='/createParty/partyInfo' render={this.partyInfoWrapper}/>
           <Route path='/createParty/guestInfo' render={this.userInfoWrapper}/>
+          <Route path='/createParty/previewPage' render={this.previewPageWrapper}/>
         </div>
         <div className="col-sm-6"
              style={{height: '300px', backgroundImage: 'url(' + this.colorBasedOnPartyType() + ')',

@@ -43,11 +43,8 @@ class PartyInfo extends Component {
   }
 }
 
-const selector = formValueSelector('partyInfo'); // <-- same as form name
-
 function mapStateToProps(state, ownProps) {
   return {
-    username: selector(state, 'username')
   };
 }
 
