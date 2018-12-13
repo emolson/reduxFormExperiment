@@ -22,12 +22,12 @@ class PartyInfo extends Component {
     return (
       <form onSubmit={handleSubmit}>
         <h1>Party Information:</h1>
+
         <DropDownField
           name="partyType"
           options={['Birthday', 'Sports', 'Rager']}
           label="Type of Party"
-          validate={[required]}
-        />
+          validate={[required]}/>
 
         <Address/>
 

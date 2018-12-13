@@ -22,6 +22,7 @@ class CreateParty extends React.Component {
     this.partyInfoWrapper = this.partyInfoWrapper.bind(this);
     this.userInfoWrapper = this.userInfoWrapper.bind(this);
     this.previewPageWrapper = this.previewPageWrapper.bind(this);
+    this.getReduxFormImage = this.getReduxFormImage.bind(this);
   }
 
   onPartySubmit(values) {
@@ -29,8 +30,7 @@ class CreateParty extends React.Component {
   }
   onUserSubmit(values) {
     this.props.history.push('/createParty/previewPage');
-    //todo test to make sure you can reset pages on final submission
-    //values.address.zip === '333' && this.props.dispatch(reset('partyInfo'));
+    //this.props.dispatch(reset('partyInfo'));
   }
 
   colorBasedOnPartyType() {
@@ -41,6 +41,10 @@ class CreateParty extends React.Component {
     } else if (this.props.partyType === 'Rager') {
       return require("../../styles/backgrounds/giphy4.gif");
     }
+  }
+
+  getReduxFormImage() {
+    return require("../../styles/backgrounds/Redux-Form.png");
   }
 
   partyInfoWrapper() {
@@ -62,6 +66,7 @@ class CreateParty extends React.Component {
   }
 
   render() {
+    let isIntro = this.props.location.pathname === '/createParty/new';
 
     return (
       <div className="container">
@@ -72,8 +77,14 @@ class CreateParty extends React.Component {
         </div>
         <div className="col-sm-6"
              style={{height: '300px', backgroundImage: 'url(' + this.colorBasedOnPartyType() + ')',
-               backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}>Party type here:
+               backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}>
+          {!isIntro && 'Party type here:'}
         </div>
+        {isIntro &&
+        <div
+             style={{height: '800px', backgroundImage: 'url(' + this.getReduxFormImage() + ')',
+               backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}>
+        </div>}
       </div>
     );
   }

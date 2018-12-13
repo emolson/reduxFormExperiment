@@ -18,3 +18,9 @@ export function numeric(value) {
     ? 'Only numbers'
     : undefined;
 }
+
+export function checkZipForState(value, allValues, props, name) {
+  return props.form === 'partyInfo' && value.length == 5 && allValues.address.zip != 54474 && allValues.address.state === 'WI'
+    ? 'This is not a Wisconsin zip'
+    : undefined;
+}

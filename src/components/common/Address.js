@@ -6,7 +6,7 @@ import {Field, FormSection} from 'redux-form';
 
 import InputField from '../renderFields/InputField';
 import DropDownField from '../renderFields/DropDownField';
-import {required, numeric} from "../../validation/validation";
+import {required, numeric, checkZipForState} from "../../validation/validation";
 
 
 class Address extends FormSection {
@@ -32,7 +32,7 @@ class Address extends FormSection {
         <InputField
           name="zip"
           label="Zip"
-          validate={[required, numeric]}
+          validate={[required, numeric, checkZipForState]}
         />
         <DropDownField
           name="country"
