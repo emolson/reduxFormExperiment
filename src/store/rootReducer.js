@@ -10,7 +10,6 @@ const rootReducer = combineReducers({
 
   // you have to pass formReducer under 'form' key,
   // for custom keys look up the docs for 'getFormState'
-  //... still dont quite understand how this works
   form: formReducer
 });
 

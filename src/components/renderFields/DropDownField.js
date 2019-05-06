@@ -11,26 +11,25 @@ import Select from 'material-ui/Select';
 import {inputTheme} from '../../styles/materialUIThemes';
 
 
-const renderField = ({input, label, meta: {touched, error}, options}) => (
-  <div style={{marginTop:'15px'}}>
-    <MuiThemeProvider theme={inputTheme()}>
-      <FormControl
-        style={{display: 'flex', flexWrap: 'wrap'}}
-        error={(touched && error) ? true : false}
-      >
-        <InputLabel htmlFor="age-simple">{label}</InputLabel>
-        <Select
-          value={input.value}
-          inputProps={input}
-          onChange={(event, index, value) => input.onChange(value)}
-          children={selectChildren(options)}
+const renderField = ({input, label, meta: {touched, error}, options}) =>
+  <div style={{marginTop: '15px'}}>
+      <MuiThemeProvider theme={inputTheme()}>
+        <FormControl
+          style={{display: 'flex', flexWrap: 'wrap'}}
+          error={(touched && error) ? true : false}
         >
-        </Select>
-      </FormControl>
-    </MuiThemeProvider>
-    {(touched && error) && <span>{error}</span>}
-  </div>
-);
+          <InputLabel htmlFor="age-simple">{label}</InputLabel>
+          <Select
+            value={input.value}
+            inputProps={input}
+            children={selectChildren(options)}
+            onChange={(event, index, value) => input.onChange(value)}
+          >
+          </Select>
+        </FormControl>
+      </MuiThemeProvider>
+      {(touched && error) && <span>{error}</span>}
+    </div>;
 
 const DropDownField = props => (
   <Field
